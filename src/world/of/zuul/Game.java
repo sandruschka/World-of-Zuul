@@ -5,6 +5,8 @@
  */
 package world.of.zuul;
 
+import world.of.zuul.Directions.Direction;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,14 +18,17 @@ import java.util.Map;
 public class Game {
     
     private Parser parser;
-    private Player player;
+    public static Player player;
     private Map<String, Room> rooms;
+    public static Room currentRoom;
     private static Game instance = new Game();
+    private Map<String, Action> actions;
     
     private Game() {
         parser = new Parser();
         player = new Player();
         rooms = new HashMap<>();
+        actions = new HashMap<>();
         createRooms();
     }
     
@@ -47,24 +52,52 @@ public class Game {
         rooms.get("lab").setExits(Direction.EAST, rooms.get("office"));
         rooms.get("office").setExits(Direction.SOUTH, rooms.get("lab"));
         
-        player.setCurrentRoom(rooms.get("outside"));
+        //player.setCurrentRoom(rooms.get("outside"));
+        currentRoom = rooms.get("outside");
         
     }
    
     public void play() {
+        
        printWelcomeMessage();
        
        boolean isPlaying = true;
        
        while (isPlaying) {
            System.out.print("> ");
-           player.doAction(parser.getAction(), parser.getInputWords());
+           doAction(parser.getCommand(), parser.getInputWords());
        }
        
        System.out.println("Thank you for playing. Good bye");
    }
     
-   public void printWelcomeMessage() {
+   private void doAction(String action, List<String> inputArgs) {
+        if (action == null)
+            return;
+
+        String name = action.substring(0, 1).toUpperCase() + action.substring(1);
+        
+        //Checking if the action exits in the actions HashMap
+        if (inputArgs != null)
+            System.out.println("action " + action + " input " + inputArgs);
+        Object a = actions.get(name);
+        if (actions != null)
+            System.out.println(actions);
+        if (a == null)  {
+            try {
+                //Retrieve a new Instance of an action class 
+                a = Class.forName("world.of.zuul.Actions." + name).getConstructor().newInstance();
+                actions.put(name, ((Action)a));
+                
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
+                System.out.println("Not a valid command. type 'help' for the valid commands");
+                return;
+            }
+        }
+        ((Action)a).execute(inputArgs);
+   }
+    
+   private void printWelcomeMessage() {
        
        //read from file
        //TODO current

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package world.of.zuul;
+package View;
 
 import java.util.Scanner;
 
@@ -13,13 +13,13 @@ import java.util.Scanner;
  */
 public class InputStream {
      private Scanner scanner;
-     String inputLine;
      
      public InputStream() {
         scanner = new Scanner(System.in);
      }
     
      public String getInputLine() {
+         System.out.println("InputStream" + scanner.nextLine());
          return scanner.nextLine();
          
      }

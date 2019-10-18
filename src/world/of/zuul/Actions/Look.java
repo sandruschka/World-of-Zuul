@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package world.of.zuul;
+package world.of.zuul.Actions;
+;
 
+import world.of.zuul.Action;
 import java.util.List;
 import world.of.zuul.Room;
+import static world.of.zuul.Game.currentRoom;
 
 /**
  *
  * @author sandra
  */
-
-//@FunctionalInterface
-public interface Action {
-     void execute(List<String> args);
+public class Look implements Action {
+    public void execute(List<String> args) {
+        System.out.println(currentRoom.getRoomDescription());
+    }
 }
-
-

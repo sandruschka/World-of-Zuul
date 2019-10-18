@@ -5,7 +5,8 @@
  */
 package world.of.zuul;
 
-import com.sun.org.glassfish.gmbal.Description;
+import world.of.zuul.Characters.Characters;
+import world.of.zuul.Directions.Direction;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +23,7 @@ public class Room {
     private String description;
     private Map<Direction, Room> exits;
     private List<Item> items;
-    private List<Player> players;
+    private List<Characters> characters;
     
     public Room(String name, String description) {
         this.name = name;
@@ -67,8 +68,10 @@ public class Room {
         return exitsString;
     } 
     
-    public void addItem(String name, int weight) {
-        items.add(new Item(name, weight));
+    public void addItem(String name, int weight, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            items.add(new Item(name, weight));
+        }
     }
     
     public Item getItem(String name) {

@@ -5,6 +5,7 @@
  */
 package world.of.zuul;
 
+import View.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,13 +20,14 @@ public class Parser {
    
    
     private Scanner tokenizer;
+    private Scanner input;
     private InputStream inputStream;
-    private List<String> words = new ArrayList<>();
-    //private Action action;
+    private List<String> words;
     
     //TODO integrate from witch stream to read and write to
     public Parser() {
-        tokenizer = new Scanner(System.in);
+        input = new Scanner(System.in);
+        
         inputStream = new InputStream();
     }
     
@@ -33,30 +35,29 @@ public class Parser {
         
     }
     
-    public ActionType getAction() {
-                
-       tokenizer = new Scanner(inputStream.getInputLine());
+    public String getCommand() {
+        
+       ////Scanner scanner = new Scanner(System.in);
+       
+       words = new ArrayList<>();
+       tokenizer = new Scanner(input.nextLine());
+       
        while (tokenizer.hasNext()) {
            words.add(tokenizer.next());
        }
        
        if (words.isEmpty()) {
-           //throw 
            return null;
        }
-       
-       try {
-            ActionType action = ActionType.valueOf(words.get(0).toUpperCase());
-            return action;
-        } catch(IllegalArgumentException e) {
-           return ActionType.UNKNOWN;
-        }
-       //handle addidtional words      
+        System.out.println("Parser" + words.get(0));
+
+       return words.get(0);
     }
     
     public List<String> getInputWords() {
-       //return words.subList(1, words.size() - 1);
-       return words;
+       if (words.isEmpty())
+           return null;
+       return words.subList(1, words.size());
     }
     
 }

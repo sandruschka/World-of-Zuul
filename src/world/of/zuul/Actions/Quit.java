@@ -3,17 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package world.of.zuul;
-;
+package world.of.zuul.Actions;
 
+import world.of.zuul.Action;
+import static java.lang.System.exit;
 import java.util.List;
+import world.of.zuul.Room;
 
 /**
  *
  * @author sandra
  */
-public class Look implements Action {
-    public void execute(Room room, List<String> args) {
-        System.out.println(room.getRoomDescription());
-    }
+public class Quit implements Action {
+     public void execute(List<String> args) {
+        exit(0);
+     }
+    
 }

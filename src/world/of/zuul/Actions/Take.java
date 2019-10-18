@@ -1,8 +1,11 @@
-package world.of.zuul;
+package world.of.zuul.Actions;
 
 
+import world.of.zuul.Action;
 import java.util.List;
+import world.of.zuul.Item;
 import world.of.zuul.Room;
+import static world.of.zuul.Game.currentRoom;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,7 +21,7 @@ public class Take implements Action {
     
     Item item;
     
-    public void execute(Room room, List<String> args) {
+    public void execute(List<String> args) {
         if (args.size() <= 1) {
             System.out.println("Take what?");
             return;
@@ -26,7 +29,7 @@ public class Take implements Action {
         
         String itemName = args.get(1);
         
-        item = room.getItem(itemName);
+        item = currentRoom.getItem(itemName);
         if (item == null) {
             System.out.println("No " + item + " in the room");
             return;
