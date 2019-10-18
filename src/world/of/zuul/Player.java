@@ -27,6 +27,7 @@ public class Player {
     //private Room currentRoom;
     private List<Item> items;
     private int maxWeight = 10;
+    private int currentWeight;
     
     
     //todo create invetory
@@ -34,6 +35,8 @@ public class Player {
     public Player() {
 //        actions = new HashMap<>();
         items = new ArrayList<>();
+        currentWeight = 0;
+        maxWeight = 10;
     }
     
     public void addItem(Item item){
@@ -43,9 +46,22 @@ public class Player {
     public void removeItem(Item item) {
         items.remove(item);
     }
-     public void setMaxWeight(int newWeight) {
+    public void setMaxWeight(int newWeight) {
          maxWeight = newWeight;
-     }
+    }
+     
+    public int getMaxWeight() {
+        return maxWeight;
+    }
+    
+    public int getCurrentWeight() {
+        return currentWeight;
+    }
+    
+    public void setCurrentWeight(int newCurrentWeight) {
+        currentWeight = newCurrentWeight;
+    }
+     
     
     
 //    public void doAction(String action, List<String> inputArgs) {

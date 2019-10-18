@@ -18,7 +18,7 @@ import java.util.Map;
 public class Game {
     
     private Parser parser;
-    public static Player player;
+    private Player player;
     private Map<String, Room> rooms;
     public static Room currentRoom;
     private static Game instance = new Game();
@@ -36,16 +36,23 @@ public class Game {
         return instance;
     } 
     
+    public Player getPlayer() {
+        return player;
+    }
+    
     private void createRooms() {
         rooms.put("outside", new Room("outside", "outside the main entrance of the university"));
         rooms.put("theatre", new Room("theatre", "in a lecture theatre"));
         rooms.put("pub", new Room("pub", "in the campus pub"));
         rooms.put("office", new Room("office", "in the computing admin office"));
         rooms.put("lab", new Room("lab", "in the computing lab"));
-        
+              
         rooms.get("outside").setExits(Direction.NORTH, rooms.get("theatre"));
         rooms.get("outside").setExits(Direction.EAST, rooms.get("lab"));
         rooms.get("outside").setExits(Direction.SOUTH, rooms.get("pub"));
+        
+        rooms.get("outside").addItem("notebook", 1);
+        rooms.get("outside").addItem("tool", 9);
         
         rooms.get("theatre").setExits(Direction.WEST, rooms.get("outside"));
         rooms.get("pub").setExits(Direction.NORTH, rooms.get("outside"));
@@ -71,6 +78,14 @@ public class Game {
        System.out.println("Thank you for playing. Good bye");
    }
     
+   public void setCurrentRoom(Room currentRoom) {
+       this.currentRoom = currentRoom;
+   }
+   
+   public Room getCurrentRoom() {
+       return currentRoom;
+   }
+    
    private void doAction(String action, List<String> inputArgs) {
         if (action == null)
             return;
@@ -78,11 +93,7 @@ public class Game {
         String name = action.substring(0, 1).toUpperCase() + action.substring(1);
         
         //Checking if the action exits in the actions HashMap
-        if (inputArgs != null)
-            System.out.println("action " + action + " input " + inputArgs);
         Object a = actions.get(name);
-        if (actions != null)
-            System.out.println(actions);
         if (a == null)  {
             try {
                 //Retrieve a new Instance of an action class 

@@ -5,6 +5,8 @@
  */
 package world.of.zuul;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import world.of.zuul.Characters.Characters;
 import world.of.zuul.Directions.Direction;
 import java.util.HashMap;
@@ -28,6 +30,8 @@ public class Room {
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
+        items = new ArrayList<>();
+        characters = new ArrayList<>();
         exits = new HashMap<>();
     }
     
@@ -37,7 +41,8 @@ public class Room {
     
     public String getRoomDescription() {
         String description = "You are " + this.description
-                + "\nExits:" + getExitsString();
+                + "\nExits:" + getExitsString()
+                + "\nItems:" + getItemsString();
         return description;
     }
     
@@ -58,6 +63,17 @@ public class Room {
         return name;
     }
     
+    private String getItemsString() {
+        
+        String resultString = "";
+        
+        for (Item i : items) {
+            String itemName = i.getName();
+            resultString += " " + itemName;
+        }
+        return resultString;
+    }
+    
     private String getExitsString() {
         String exitsString = "";
         
@@ -68,15 +84,13 @@ public class Room {
         return exitsString;
     } 
     
-    public void addItem(String name, int weight, int quantity) {
-        for (int i = 0; i < quantity; i++) {
+    public void addItem(String name, int weight) {
             items.add(new Item(name, weight));
-        }
     }
     
     public Item getItem(String name) {
         for (Item item : items) {
-            if (item.getName().equals(name.CASE_INSENSITIVE_ORDER)) {
+            if (item.getName().toLowerCase().equals(name.toLowerCase())) {
                 return item;
             }
         }
@@ -92,5 +106,9 @@ public class Room {
                 break;
             }
         }
+    }
+    
+    public void removeItem(Item item) {
+        items.remove(item);
     }
 }
