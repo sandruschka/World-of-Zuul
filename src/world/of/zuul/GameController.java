@@ -5,39 +5,71 @@
  */
 package world.of.zuul;
 
+import View.View;
 import world.of.zuul.Directions.Direction;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import world.of.zuul.Npc.Npc;
 
 /**
  *
  * @author sandra
  */
-public class Game {
+public class GameController {
     
-    private Parser parser;
-    private Player player;
+    private InputHandling parser;
+    private View view;
+    private List<Player> players;
+    private int currentPlayer;
     private Map<String, Room> rooms;
-    public static Room currentRoom;
-    private static Game instance = new Game();
+    //public static Room currentRoom;
+    private static GameController instance = new GameController();
     private Map<String, Action> actions;
+    private NpcHandler npcs;
     
-    private Game() {
-        parser = new Parser();
-        player = new Player();
+    
+    private GameController() {
+        parser = new InputHandling();
+        players = new ArrayList<>();
         rooms = new HashMap<>();
         actions = new HashMap<>();
+        view = new View();
         createRooms();
+        createPlayers();
+        npcs = new NpcHandler();
+        npcs.createNpc("Rudolf", rooms.get("outside"));
+       
+
     }
     
-    public static Game getInstance() {
+    /*
+    *  returns the list of rooms
+    */
+    public List<Room> getRooms() {
+        List<Room> r = new ArrayList<>(rooms.values());
+        return r;
+    }
+    
+    public static GameController getInstance() {
         return instance;
     } 
     
+    public NpcHandler getNpcHandler() {
+        return npcs;
+    }
+    
     public Player getPlayer() {
-        return player;
+        return players.get(currentPlayer);
+    }
+    
+    private void createPlayers() {
+        players.add(new Player());
+        //players.add(new Player());
+        players.get(0).setCurrentRoom(rooms.get("outside"));
+        //players.get(1).setCurrentRoom(rooms.get("theatre"));
     }
     
     private void createRooms() {
@@ -54,13 +86,13 @@ public class Game {
         rooms.get("outside").addItem("notebook", 1);
         rooms.get("outside").addItem("tool", 9);
         
+       // rooms.get("outside").addCharacter("bear");
+       // rooms.get("outside").addCharacter("mouse");
+        
         rooms.get("theatre").setExits(Direction.WEST, rooms.get("outside"));
         rooms.get("pub").setExits(Direction.NORTH, rooms.get("outside"));
         rooms.get("lab").setExits(Direction.EAST, rooms.get("office"));
         rooms.get("office").setExits(Direction.SOUTH, rooms.get("lab"));
-        
-        //player.setCurrentRoom(rooms.get("outside"));
-        currentRoom = rooms.get("outside");
         
     }
    
@@ -71,19 +103,36 @@ public class Game {
        boolean isPlaying = true;
        
        while (isPlaying) {
-           System.out.print("> ");
-           doAction(parser.getCommand(), parser.getInputWords());
+           
+            currentPlayer = 0;
+            
+            //Ai controller class inside it create a new thread, and in that thread, the characters are moving rooms
+            while (!players.isEmpty() && currentPlayer < players.size()) {
+                System.out.print("Player " + (currentPlayer + 1) + " > ");
+                doAction(parser.getAction(), parser.getInputWords());
+                currentPlayer++;
+                updateView();
+            }
        }
        
        System.out.println("Thank you for playing. Good bye");
    }
     
-   public void setCurrentRoom(Room currentRoom) {
-       this.currentRoom = currentRoom;
+   public void updateView() {
+       view.update()
+   }
+    
+   public void setCurrentRoom(Room currentRoom, int player) {
+       players.get(player).setCurrentRoom(currentRoom);
+   }
+    
+   public void setPlayerCurrentRoom(Room currentRoom) {
+       players.get(currentPlayer).setCurrentRoom(currentRoom);
    }
    
-   public Room getCurrentRoom() {
-       return currentRoom;
+   public Room getPlayerCurrentRoom() {
+       //System.out.println("Currentplayer " + currentPlayer);
+       return players.get(currentPlayer).getCurrentRoom();
    }
     
    private void doAction(String action, List<String> inputArgs) {
@@ -115,7 +164,7 @@ public class Game {
     String welcomeMessage = "Welcome to the World of Zuul!\n"
             + "World of Zuul is a new, incredibly boring adventure game.\n"
             + "Type 'help' if you need help.\n\n"
-            + "You are ";   
+            + players.get(currentPlayer).getCurrentRoom().getRoomDescription();
     System.out.println(welcomeMessage);
 } 
     

@@ -15,7 +15,7 @@ public class WorldOfZuul {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Game.getInstance().play();
+        GameController.getInstance().play();
     }
     
 }

@@ -1,0 +1,18 @@
+{
+    "outside" : {
+        "description": "outside the main entrance of the university",
+        "exits" : {
+            "north" : "theatre", "east" : "lab", "south" : "pub"
+        },
+        "characters" : [
+            {
+            "name" : "mouse"
+            }
+        ],
+        "items" : [
+            {
+            "name" : "notebook", "weight" : 1
+            }
+        ]
+    }
+}

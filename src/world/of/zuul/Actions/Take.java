@@ -3,10 +3,9 @@ package world.of.zuul.Actions;
 
 import world.of.zuul.Action;
 import java.util.List;
-import world.of.zuul.Game;
+import world.of.zuul.GameController;
 import world.of.zuul.Item;
 import world.of.zuul.Room;
-import static world.of.zuul.Game.currentRoom;
 import world.of.zuul.Player;
 
 /*
@@ -31,21 +30,22 @@ public class Take implements Action {
         }
         
         String itemName = args.get(0);
-        System.out.println("ITEMNAME" + itemName);
+        //System.out.println("ITEMNAME" + itemName);
+        Room currentRoom = GameController.getInstance().getPlayerCurrentRoom();
         
         item = currentRoom.getItem(itemName);
         if (item == null) {
-            System.out.println("No " + item + " in the room");
+            System.out.println("No " + itemName + " in the room");
             return;
         }
         
-        Player player =  Game.getInstance().getPlayer();
+        Player player =  GameController.getInstance().getPlayer();
         
         if (player.getCurrentWeight() + item.getWeight() >= player.getMaxWeight()) {
             System.out.println(item.getName() + " is too heavy");
         } else {
             
-            Game.getInstance().getCurrentRoom().removeItem(item);
+            currentRoom.removeItem(item);
             player.addItem(item);
             player.setCurrentWeight(player.getCurrentWeight() + item.getWeight());
         }

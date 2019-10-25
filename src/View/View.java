@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package world.of.zuul.Characters;
+package View;
 
 /**
  *
  * @author sandra
  */
-public class Characters {
+public class View {
     
+    public View () {
+        
+    }
+    public void update() {
+        
+    }
 }

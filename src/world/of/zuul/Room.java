@@ -7,7 +7,7 @@ package world.of.zuul;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import world.of.zuul.Characters.Characters;
+import world.of.zuul.Npc.Npc;
 import world.of.zuul.Directions.Direction;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,7 +25,8 @@ public class Room {
     private String description;
     private Map<Direction, Room> exits;
     private List<Item> items;
-    private List<Characters> characters;
+    private List<Npc> characters;
+    
     
     public Room(String name, String description) {
         this.name = name;
@@ -33,6 +34,7 @@ public class Room {
         items = new ArrayList<>();
         characters = new ArrayList<>();
         exits = new HashMap<>();
+       
     }
     
     public void setExits(Direction direction, Room neighbour) {
@@ -42,21 +44,27 @@ public class Room {
     public String getRoomDescription() {
         String description = "You are " + this.description
                 + "\nExits:" + getExitsString()
-                + "\nItems:" + getItemsString();
+                + "\nItems:" + getItemsString()
+                + "\nNpc:" + GameController.getInstance().getNpcHandler().getStringNpcsInRoom(this);
         return description;
-    }
-    
-    private String getListString(List<?> list) {
-        String resultString = "";
-        
-        for (Object l : list) {
-            //resultString += " " + l.getName();
-        }
-        return resultString;
     }
     
     public Room leaveRoom(Direction direction) {
             return exits.get(direction);
+    }
+    
+    public List<Direction> getExits() {
+        List<Direction> result =  new ArrayList<>();
+        for (Direction key : exits.keySet()) {
+            result.add(key);
+        }
+        return result;
+    }
+    
+    public Npc getCharacter(String character) {
+        return characters.stream()
+                .filter(x -> x.getName().equals(character))
+                .findAny().orElse(null);
     }
     
     public String getRoomName() {

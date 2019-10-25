@@ -8,8 +8,7 @@ package world.of.zuul.Actions;
 import world.of.zuul.Action;
 import java.util.List;
 import world.of.zuul.Directions.Direction;
-import world.of.zuul.Game;
-import static world.of.zuul.Game.currentRoom;
+import world.of.zuul.GameController;
 import world.of.zuul.Room;
 
 /**
@@ -29,14 +28,19 @@ public class Go implements Action {
         }
         
         String direction = args.get(0);
-        if (Direction.isValidDirection(direction)) {
-            System.out.println("in try");
-            Direction dir = Direction.valueOf(args.get(0).toUpperCase());
-            Room newRoom = currentRoom.leaveRoom(dir);
-            Game.getInstance().setCurrentRoom(newRoom);
-            System.out.println("HERE" + currentRoom.getRoomDescription());
-        } else {
+        if (!Direction.isValidDirection(direction)) {
             System.out.println(direction + ": There is no such direction");
+            return;
+        }
+        try {
+            Direction dir = Direction.valueOf(args.get(0).toUpperCase());
+            Room currentRoom = GameController.getInstance().getPlayerCurrentRoom();
+            Room newRoom = currentRoom.leaveRoom(dir);
+
+            GameController.getInstance().setPlayerCurrentRoom(newRoom);
+            System.out.println("HERE" + currentRoom.getRoomDescription());
+        } catch(NullPointerException e) {
+            System.out.println("There is no door to the " + direction);
         }
     }
 }

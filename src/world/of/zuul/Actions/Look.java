@@ -8,8 +8,12 @@ package world.of.zuul.Actions;
 
 import world.of.zuul.Action;
 import java.util.List;
+import world.of.zuul.GameController;
 import world.of.zuul.Room;
-import static world.of.zuul.Game.currentRoom;
+import world.of.zuul.Action;
+import java.util.List;
+import world.of.zuul.GameController;
+import world.of.zuul.Room;
 
 /**
  *
@@ -17,6 +21,6 @@ import static world.of.zuul.Game.currentRoom;
  */
 public class Look implements Action {
     public void execute(List<String> args) {
-        System.out.println(currentRoom.getRoomDescription());
+        System.out.println(GameController.getInstance().getPlayerCurrentRoom().getRoomDescription());
     }
 }

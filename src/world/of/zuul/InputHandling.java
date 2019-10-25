@@ -15,46 +15,49 @@ import java.util.stream.Stream;
 /**
  *
  * @author sandra
+ * Handles the input stream and transforms the input as words
  */
-public class Parser {
+public class InputHandling {
    
    
     private Scanner tokenizer;
     private Scanner input;
-    private InputStream inputStream;
     private List<String> words;
     
     //TODO integrate from witch stream to read and write to
-    public Parser() {
-        input = new Scanner(System.in);
+    public InputHandling() {
         
-        inputStream = new InputStream();
+        input = new Scanner(System.in);
     }
     
     private void setPrintStream() {
         
     }
     
-    public String getCommand() {
+    //returns the first word of the user input - being the action
+    public String getAction() {
         
-       ////Scanner scanner = new Scanner(System.in);
-       
        words = new ArrayList<>();
+       
+       //Scan the user input
        tokenizer = new Scanner(input.nextLine());
        
+       //each word (which has to be seperated with a space) is stored in the array list 'words'
        while (tokenizer.hasNext()) {
            words.add(tokenizer.next());
        }
        
+       //TODO throw 
        if (words.isEmpty()) {
            return null;
        }
-        System.out.println("Parser" + words.get(0));
-
        return words.get(0);
     }
     
+    //returns the all the words after the action 
     public List<String> getInputWords() {
+        
+        //todo return optional
        if (words.isEmpty())
            return null;
        return words.subList(1, words.size());
