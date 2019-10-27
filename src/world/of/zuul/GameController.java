@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class GameController {
     
-    private InputHandling inputHandling;
+    private InputHandler inputHandling;
     private View view;
     private List<Player> players;
     
@@ -40,7 +40,7 @@ public class GameController {
     
     
     private GameController() {
-        inputHandling = new InputHandling();
+        inputHandling = new InputHandler();
         players = new ArrayList<>();
         rooms = new HashMap<>();
         actions = new HashMap<>();

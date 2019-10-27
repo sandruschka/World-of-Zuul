@@ -5,24 +5,21 @@
  */
 package View;
 
+import javax.swing.JLabel;
+
 /**
- *
+ * 
  * @author sandra
  */
 public class View {
     
     /**
      *
-     */
-    public View () {
-        
-    }
-
-    /**
-     *
+     * @param output
      */
     public void update(String output) {
         
+        JLabel label = new JLabel(output);
         if (output == null || output.isEmpty())
             return;
         
