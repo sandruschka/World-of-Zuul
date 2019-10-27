@@ -23,8 +23,6 @@ public class Look implements Action {
      */
     @Override
     public String execute(List<String> args) {
-        String lookDesc = GameController.getInstance().getPlayerCurrentRoom().getRoomDescription();
-        System.out.println(lookDesc);
-        return lookDesc;
+        return GameController.getInstance().getPlayerCurrentRoom().getRoomDescription();
     }
 }

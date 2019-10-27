@@ -49,19 +49,17 @@ public class Give implements Action {
          * the npcsHandler checks if there an npc in the current room
          */
         if (!npcHandler.isNpcInRoom(npc, currentRoom)) {
-            System.out.println(npc + " is not in the room");
             return npc + " is not in the room";
         }
         
         Item i = player.getItem(item);
         if (i == null) {
-            System.out.println("You don't have the " + item);
             return "You don't have the " + item;
         } else {
             player.removeItem(i);
             int w = i.getWeight();
             player.setCurrentWeight(player.getCurrentWeight() - w);
         }
-        return "";
+        return null;
     }
 }

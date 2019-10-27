@@ -24,7 +24,7 @@ public class Quit implements Action {
     @Override
      public String execute(List<String> args) {
         GameController.getInstance().deletePlayer();
-        return "";
+        return null;
      }
     
 }

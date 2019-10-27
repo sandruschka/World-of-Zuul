@@ -26,13 +26,11 @@ public class Go implements Action {
     public String execute(List<String> args) {
         
         if (args.size() < 1) {
-            System.out.println("Go where?");
             return "Go where?";
         }
         
         String direction = args.get(0);
         if (!Direction.isValidDirection(direction)) {
-            System.out.println(direction + ": There is no such direction");
             return direction + ": There is no such direction";
         }
         try {
@@ -42,9 +40,8 @@ public class Go implements Action {
 
             GameController.getInstance().setPlayerCurrentRoom(newRoom);
         } catch(NullPointerException e) {
-            System.out.println("There is no door to the " + direction);
             return "There is no door to the " + direction;
         }
-        return "";
+        return null;
     }
 }

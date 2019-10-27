@@ -22,10 +22,8 @@ public class Help implements Action {
      */
     @Override
     public String execute(List<String> args) {
-        String helpMessage = "You are list. You are alone. You wander\n"
+        return "You are list. You are alone. You wander\n"
                 + "around at the university\n\n"
                 + "Your command words are" + new ValidActions().getActionsString();
-        System.out.println(helpMessage);
-        return helpMessage;
     }
 }

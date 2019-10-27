@@ -21,7 +21,11 @@ public class View {
     /**
      *
      */
-    public void update() {
+    public void update(String output) {
         
+        if (output == null || output.isEmpty())
+            return;
+        
+        System.out.print(output);
     }
 }

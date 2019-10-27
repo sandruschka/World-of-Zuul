@@ -28,7 +28,6 @@ public class Take implements Action {
     public String execute(List<String> args) {
         
         if (args.size() < 1) {
-            System.out.println("Take what?");
             return "Take what?";
         }
         
@@ -38,20 +37,18 @@ public class Take implements Action {
         Item item = currentRoom.getItem(itemName);
         
         if (item == null) {
-            System.out.println("No " + itemName + " in the room");
             return "No " + itemName + " in the room";
         }
         
         Player player =  GameController.getInstance().getPlayer();
         
         if (player.getCurrentWeight() + item.getWeight() >= player.getMaxWeight()) {
-            System.out.println(item.getName() + " is too heavy");
             return item.getName() + " is too heavy";
         } else {
             currentRoom.removeItem(item);
             player.addItem(item);
             player.setCurrentWeight(player.getCurrentWeight() + item.getWeight());
         }
-        return "";
+        return null;
     }
 }

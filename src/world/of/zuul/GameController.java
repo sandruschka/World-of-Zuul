@@ -33,6 +33,11 @@ public class GameController {
     private Map<String, Action> actions;
     private NpcHandler npcs;
     
+    /**
+     * what the user will see as output
+     */
+    private String output;
+    
     
     private GameController() {
         inputHandling = new InputHandling();
@@ -118,7 +123,7 @@ public class GameController {
      */
     public void play() {
         
-       printWelcomeMessage();
+       updateView(WelcomeMessage());
        
        while (!players.isEmpty()) {
            
@@ -127,22 +132,24 @@ public class GameController {
             //TODO UpdateView
             while (currentPlayer < players.size()) {
                 
-                System.out.print("Player " + (currentPlayer + 1) + " > ");
-                doAction(inputHandling.getAction(), inputHandling.getInputWords());
+                updateView("Player " + (currentPlayer + 1) + " > ");
+                output = doAction(inputHandling.getAction(), inputHandling.getInputWords());
+                
+                if (output != null)
+                    updateView(output + "\n");
                 currentPlayer++;
-                updateView();
             }
        }
        
-       System.out.println("Thank you for playing. Good bye");
+       updateView("Thank you for playing. Good bye\n");
        exit(0);
    }
     
     /**
      * update the view for the user
      */
-    public void updateView() {
-       view.update();
+    public void updateView(String output) {
+       view.update(output);
    }
     
    //set current room for player when creating a player object
@@ -173,13 +180,13 @@ public class GameController {
        return players.get(currentPlayer).getRoom();
    }
     
-   private void doAction(String action, List<String> inputArgs) {
+   private String doAction(String action, List<String> inputArgs) {
        
         /**
          * if no input provided nothing happens (if the player clicks enter for example)
          */
         if (action == null)
-            return;
+            return null;
 
         /**
          * transform the action string to first letter uppercase and the rest to lowercase
@@ -200,11 +207,10 @@ public class GameController {
                 actions.put(name, ((Action)a));
                 
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
-                System.out.println("Not a valid command. type 'help' for the valid commands");
-                return;
+                return "Not a valid command. type 'help' for the valid commands";
             }
         }
-        ((Action)a).execute(inputArgs);
+        return ((Action)a).execute(inputArgs);
    }
    
     /**
@@ -214,15 +220,13 @@ public class GameController {
        players.remove(currentPlayer);
    }
     
-   private void printWelcomeMessage() {
-       
+   private String WelcomeMessage() {
        //TODO read from file
-    String welcomeMessage = "Welcome to the World of Zuul!\n"
+    return "Welcome to the World of Zuul!\n"
             + "World of Zuul is a new, incredibly boring adventure game.\n"
             + "Type 'help' if you need help.\n\n"
-            + players.get(currentPlayer).getRoom().getRoomDescription();
-    System.out.println(welcomeMessage);
-} 
+            + players.get(currentPlayer).getRoom().getRoomDescription() + "\n";
+    } 
     
 }
 
