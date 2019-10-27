@@ -5,24 +5,27 @@
  */
 package world.of.zuul.Actions;
 
-import world.of.zuul.ActionType;
+import world.of.zuul.ValidActions;
 import world.of.zuul.Action;
 import java.util.List;
-import world.of.zuul.Room;
 
 /**
- *
+ * The action which helps the user by printing the valid actions
  * @author sandra
  */
 public class Help implements Action {
     
-    public Help() {
-    }
-    
-    public void execute(List<String> args) {
+    /**
+     * @return output
+     * @see world.of.zuul.Action
+     * @param args
+     */
+    @Override
+    public String execute(List<String> args) {
         String helpMessage = "You are list. You are alone. You wander\n"
                 + "around at the university\n\n"
-                + "Your command words are" + ActionType.getActionsString();
+                + "Your command words are" + new ValidActions().getActionsString();
         System.out.println(helpMessage);
+        return helpMessage;
     }
 }

@@ -9,18 +9,22 @@ package world.of.zuul.Actions;
 import world.of.zuul.Action;
 import java.util.List;
 import world.of.zuul.GameController;
-import world.of.zuul.Room;
-import world.of.zuul.Action;
-import java.util.List;
-import world.of.zuul.GameController;
-import world.of.zuul.Room;
 
 /**
- *
+ * This action lets the player receive information on its surrounding
  * @author sandra
  */
 public class Look implements Action {
-    public void execute(List<String> args) {
-        System.out.println(GameController.getInstance().getPlayerCurrentRoom().getRoomDescription());
+
+    /**
+     * @return output
+     * @see world.of.zuul.Action
+     * @param args
+     */
+    @Override
+    public String execute(List<String> args) {
+        String lookDesc = GameController.getInstance().getPlayerCurrentRoom().getRoomDescription();
+        System.out.println(lookDesc);
+        return lookDesc;
     }
 }

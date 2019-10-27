@@ -6,13 +6,26 @@
 package world.of.zuul.Directions;
 
 /**
- *
+ * Present in this class are all the valid directions
  * @author sandra
  */
 public enum Direction {
-    NORTH, EAST, SOUTH, WEST, UNKOWN;
+
+    NORTH,
+    EAST,
+    SOUTH,
+    WEST;
     
+    /**
+     *
+     * @param dir   name of the direction
+     * @return  true if the direction is valid
+     */
     public static boolean isValidDirection(String dir) {
-        return Direction.valueOf(dir.toUpperCase()) == null ? false : true;
+        for (Direction d : Direction.values()) {
+            if (d.name().equalsIgnoreCase(dir))
+                return true;
+        }
+        return false;
     }
 }

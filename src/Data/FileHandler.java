@@ -11,42 +11,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Managing files and packages
  * @author sandra
  */
 public class FileHandler {
    
+    /**
+     * Default constructor
+     */
     public FileHandler() {
-        
     }
     
+    /**
+     * Finds all the class names from a package
+     * @param packageName
+     * @return a list containing each name as a String
+     */
     public List<String> getClassesFromPackage(String packageName) {
         List<String> classes = new ArrayList<>();
         
         File directory = getPackageDirectory(packageName);
         
-         for (String filename : directory.list()) {
+        for (String filename : directory.list())
             classes.add(filename);
-        }
-        System.out.println(classes);
+        
         return classes;
     }
     
-    private String buildClassname(String packageName, String filename) {
-        return packageName + '.' + filename.replace(".class", "");
-    }
-    
-    private File getPackageDirectory(String packageName) {
+    /**
+     * 
+     * @param packageName
+     * @return the File object of the directory
+     * @throws NullPointerException 
+     */
+    private File getPackageDirectory(String packageName) throws NullPointerException {
+        
         ClassLoader cld = Thread.currentThread().getContextClassLoader();
        
         if (cld == null) 
-            return null;
+            throw new NullPointerException("ClassLoader not found");
  
+        //get path to the directory
         URL resource = cld.getResource(packageName.replace('.', '/'));
         
-        if (resource == null) {
-            return null;
-        }
+        if (resource == null)
+            throw new NullPointerException("Resource not found");
         
         return new File(resource.getFile());
     }

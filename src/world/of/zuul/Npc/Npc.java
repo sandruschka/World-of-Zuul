@@ -9,39 +9,42 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import world.of.zuul.LivingEntity;
 import world.of.zuul.Directions.Direction;
 import world.of.zuul.Item;
 import world.of.zuul.Room;
 
 /**
- *
+ * Non playing characters class
  * @author sandra
  */
-public class Npc {//implements Runnable {
+public class Npc extends LivingEntity {
 
     private String name;
-    private Room currentRoom;
     private List<Item> items;
     private static int SECOND = 1000;
     
+    /**
+     * @see world.of.zuul.LivingEntity
+     * @param name
+     * @param room
+     */
     public Npc(String name, Room room) {
+        super(room);
         this.name = name;
-        currentRoom = room;
-        computerControlledNpc();
     }
     
-    //TODO create being abstract class
+    /**
+     *
+     * @return the name of the npc
+     */
     public String getName() {
         return name;
     }
     
-    public Room getRoom() {
-        return currentRoom;
-    }
-    
+    /**
+     * this function makes the npc move about the university on its own
+     */
     public void computerControlledNpc() {
         
         TimerTask task = new TimerTask() {
@@ -49,20 +52,29 @@ public class Npc {//implements Runnable {
             public void run() {
                 List<Direction> dir = currentRoom.getExits();
 
-                //The npc is chosing an exit randomly
+                /**
+                 * The npc is choosing an exit randomly
+                 */
                 Collections.shuffle(dir);
 
-                //going to a new room
+                
+                /**
+                 * going to a new room
+                 */
                 currentRoom = currentRoom.leaveRoom(dir.get(0));
-                System.out.println(name + " moved to room: " + currentRoom.getRoomName());
+               System.out.println(name + " moved to room: " + currentRoom.getRoomName());
 
             }
         };
 
         long delay = 10 * SECOND;
-        long intevalPeriod = 20 * SECOND; 
+        long intevalPeriod = 30 * SECOND; 
         
         Timer timer = new Timer();
+        
+        /**
+         * the task will be run everyintevalPeriod starting from delay
+         */
         timer.scheduleAtFixedRate(task, delay, intevalPeriod);
 
     }

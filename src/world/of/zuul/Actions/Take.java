@@ -5,8 +5,8 @@ import world.of.zuul.Action;
 import java.util.List;
 import world.of.zuul.GameController;
 import world.of.zuul.Item;
-import world.of.zuul.Room;
 import world.of.zuul.Player;
+import world.of.zuul.Room;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,45 +15,43 @@ import world.of.zuul.Player;
  */
 
 /**
- *
+ * This action lets the player take items from a room
  * @author sandra
  */
 public class Take implements Action {
     
-    Item item;
-    
-   
-    public void execute(List<String> args) {
+    /**
+     * @see world.of.zuul.Action
+     * @param args
+     */
+    @Override
+    public String execute(List<String> args) {
+        
         if (args.size() < 1) {
             System.out.println("Take what?");
-            return;
+            return "Take what?";
         }
         
         String itemName = args.get(0);
-        //System.out.println("ITEMNAME" + itemName);
         Room currentRoom = GameController.getInstance().getPlayerCurrentRoom();
         
-        item = currentRoom.getItem(itemName);
+        Item item = currentRoom.getItem(itemName);
+        
         if (item == null) {
             System.out.println("No " + itemName + " in the room");
-            return;
+            return "No " + itemName + " in the room";
         }
         
         Player player =  GameController.getInstance().getPlayer();
         
         if (player.getCurrentWeight() + item.getWeight() >= player.getMaxWeight()) {
             System.out.println(item.getName() + " is too heavy");
+            return item.getName() + " is too heavy";
         } else {
-            
             currentRoom.removeItem(item);
             player.addItem(item);
             player.setCurrentWeight(player.getCurrentWeight() + item.getWeight());
         }
-        
-        
-//        if (item.getWeight() + w <= MAX_WEIGHT) {
-//            System.out.println(item + " is too heavy");
-//            return;
-//        }
+        return "";
     }
 }

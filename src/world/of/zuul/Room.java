@@ -6,14 +6,12 @@
 package world.of.zuul;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import world.of.zuul.Npc.Npc;
 import world.of.zuul.Directions.Direction;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -25,97 +23,117 @@ public class Room {
     private String description;
     private Map<Direction, Room> exits;
     private List<Item> items;
-    private List<Npc> characters;
     
-    
+    /**
+     * constructor
+     * @param name  the name of the room
+     * @param description   the room's description
+     */
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
         items = new ArrayList<>();
-        characters = new ArrayList<>();
         exits = new HashMap<>();
        
     }
     
-    public void setExits(Direction direction, Room neighbour) {
+    /**
+     * 
+     * @param direction the key of the exits hashMap
+     * @param neighbour the room being a new exit
+     * @see world.of.zuul.Directions.Direction
+     */
+    public void setExit(Direction direction, Room neighbour) {
         exits.put(direction, neighbour);
     }
     
+    /**
+     *  
+     * @return  a string describing the room
+     */
     public String getRoomDescription() {
         String description = "You are " + this.description
-                + "\nExits:" + getExitsString()
-                + "\nItems:" + getItemsString()
+                + "\nExits: " + getExitsString()
+                + "\nItems: " + getItemsString()
                 + "\nNpc:" + GameController.getInstance().getNpcHandler().getStringNpcsInRoom(this);
         return description;
     }
     
+    /**
+     *
+     * @param direction
+     * @return  Room object of the new current room
+     */
     public Room leaveRoom(Direction direction) {
             return exits.get(direction);
     }
     
+    /**
+     *
+     * @return  all the exits available in the room
+     */
     public List<Direction> getExits() {
-        List<Direction> result =  new ArrayList<>();
-        for (Direction key : exits.keySet()) {
-            result.add(key);
-        }
-        return result;
+        return exits.entrySet().stream().map(x-> x.getKey()).collect(Collectors.toList());
     }
     
-    public Npc getCharacter(String character) {
-        return characters.stream()
-                .filter(x -> x.getName().equals(character))
-                .findAny().orElse(null);
-    }
-    
+    /**
+     *
+     * @return the room's name
+     */
     public String getRoomName() {
         return name;
     }
     
-    private String getItemsString() {
-        
-        String resultString = "";
-        
-        for (Item i : items) {
-            String itemName = i.getName();
-            resultString += " " + itemName;
-        }
-        return resultString;
-    }
+    
     
     private String getExitsString() {
-        String exitsString = "";
-        
-        Set<Direction> keys = exits.keySet();
-        for (Direction dir : keys) {
-            exitsString += " " + dir.toString();
-        }
-        return exitsString;
+        return exits.entrySet().stream()
+                .map(exit -> exit.getKey().toString())
+                .collect(Collectors.joining(" "));
     } 
     
+    /**
+     *
+     * @param name  name of the new item to add
+     * @param weight weight of the new item to add
+     */
     public void addItem(String name, int weight) {
             items.add(new Item(name, weight));
     }
     
+    private String getItemsString() {
+        return items.stream()
+                .map(item -> item.getName())
+                .collect(Collectors.joining(" "));
+    }
+    
+    /**
+     *
+     * @param name  
+     * @return   Ttem object if matching with the name
+     */
     public Item getItem(String name) {
-        for (Item item : items) {
-            if (item.getName().toLowerCase().equals(name.toLowerCase())) {
-                return item;
-            }
-        }
-        return null;
+        return items.stream()
+                .filter(item -> item.getName().equalsIgnoreCase(name))
+                .findFirst().orElse(null);
     }
     
+    /**
+     * 
+     * @param name removes all the items in the list corresponding to the name
+     */
     public void removeItem(String name) {
-        Iterator i = items.iterator();
-        while (i.hasNext()) {
-            Item item = (Item)i.next();
-            if (item.getName().equals(name)) {
-                i.remove();
-                break;
-            }
-        }
+        List<Item> operatedList = new ArrayList<>();
+        items.stream()
+                .filter(item -> item.getName().equalsIgnoreCase(name))
+                .forEach(item -> operatedList.add(item));
+        items.removeAll(operatedList);
     }
     
+    /**
+     *
+     * @param item removes an Item object in the items list
+     */
     public void removeItem(Item item) {
         items.remove(item);
     }

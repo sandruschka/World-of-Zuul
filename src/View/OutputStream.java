@@ -16,6 +16,9 @@ public class OutputStream {
     
     PrintStream outputStream;
     
+    /**
+     *
+     */
     public OutputStream() {
         outputStream = System.out;
     }

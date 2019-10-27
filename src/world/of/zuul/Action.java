@@ -6,16 +6,25 @@
 package world.of.zuul;
 
 import java.util.List;
-import world.of.zuul.Room;
 
 /**
- *
+ * Action interface - Using the command Pattern Design
  * @author sandra
  */
 
-//@FunctionalInterface
 public interface Action {
-     void execute(List<String> args);
+    
+    /**
+     *This is the package containing all the action classes
+     */
+    public static String PACKAGE_NAME = "world.of.zuul.Actions";
+    
+    /**
+     * 
+     * @param args  the user input (excluding the action command)
+     * @return the user output
+     */
+    String execute(List<String> args);
 }
 
 

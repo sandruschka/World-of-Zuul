@@ -5,7 +5,6 @@
  */
 package world.of.zuul;
 
-import View.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,21 +24,23 @@ public class InputHandling {
     private List<String> words;
     
     //TODO integrate from witch stream to read and write to
+
+    /**
+     * constructor 
+     */
     public InputHandling() {
-        
         input = new Scanner(System.in);
     }
     
-    private void setPrintStream() {
-        
-    }
-    
-    //returns the first word of the user input - being the action
+    /**
+     * 
+     * @return      the first word of the user input - being the action
+     */
     public String getAction() {
         
        words = new ArrayList<>();
        
-       //Scan the user input
+       //Scan the user input line
        tokenizer = new Scanner(input.nextLine());
        
        //each word (which has to be seperated with a space) is stored in the array list 'words'
@@ -51,10 +52,13 @@ public class InputHandling {
        if (words.isEmpty()) {
            return null;
        }
+       
        return words.get(0);
     }
     
-    //returns the all the words after the action 
+    /**
+     * @return      all the words after the action 
+     */
     public List<String> getInputWords() {
         
         //todo return optional

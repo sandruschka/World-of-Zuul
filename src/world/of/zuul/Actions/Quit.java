@@ -8,15 +8,23 @@ package world.of.zuul.Actions;
 import world.of.zuul.Action;
 import static java.lang.System.exit;
 import java.util.List;
-import world.of.zuul.Room;
+import world.of.zuul.GameController;
 
 /**
- *
+ * This action makes the player leave the game
  * @author sandra
  */
 public class Quit implements Action {
-     public void execute(List<String> args) {
-        exit(0);
+    
+    /**
+     * @see world.of.zuul.Action
+     * @param args
+     * @return output
+     */
+    @Override
+     public String execute(List<String> args) {
+        GameController.getInstance().deletePlayer();
+        return "";
      }
     
 }
