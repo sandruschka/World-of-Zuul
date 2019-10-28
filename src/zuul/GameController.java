@@ -121,12 +121,13 @@ public class GameController {
         rooms.get("outside").setExit(Direction.EAST, rooms.get("lab"));
         rooms.get("outside").setExit(Direction.SOUTH, rooms.get("pub"));
         
-        rooms.get("outside").addItem("notebook", 1);
+        rooms.get("outside").addItem("notebook", 2);
         rooms.get("outside").addItem("tool", 9);
         
         rooms.get("theatre").setExit(Direction.WEST, rooms.get("outside"));
-        rooms.get("pub").setExit(Direction.NORTH, rooms.get("outside"));
+        rooms.get("pub").setExit(Direction.EAST, rooms.get("outside"));
         rooms.get("lab").setExit(Direction.EAST, rooms.get("office"));
+        rooms.get("lab").setExit(Direction.NORTH, rooms.get("outside"));
         rooms.get("office").setExit(Direction.SOUTH, rooms.get("lab"));
         
     }
@@ -134,7 +135,7 @@ public class GameController {
     private void createNpcs() {
         npcs = new NpcHandler();
         npcs.createNpc("Rudolf", rooms.get("outside"));
-        npcs.startMoveNpcs();
+        npcs.startMoveNpcs(); // The npcs will start moving around the room
     }
    
     /**
@@ -154,7 +155,8 @@ public class GameController {
              */
             while (currentPlayer < players.size()) {
                 
-                updateView("Player " + (currentPlayer + 1) + " > ");
+                updateView(languageHandler.getText("player") + (currentPlayer + 1) + " > ");
+
                 output = doAction(inputHandling.getAction(), inputHandling.getInputWords());
                 
                 if (output != null)

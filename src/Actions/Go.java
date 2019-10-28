@@ -39,6 +39,9 @@ public class Go implements Action {
             Direction dir = Direction.valueOf(args.get(0).toUpperCase());
             Room currentRoom = GameController.getInstance().getPlayerCurrentRoom();
             Room newRoom = currentRoom.leaveRoom(dir);
+            
+            if (newRoom == null)
+                throw new NullPointerException();
 
             GameController.getInstance().setPlayerCurrentRoom(newRoom);
         } catch(NullPointerException e) {

@@ -7,7 +7,7 @@
     "go_where" : "Go where?",
     "go_direction" : ": There is no such direction",
     "go_exit" : "There is no door to the ",
-    "help" : "You are list. You are alone. You wander\naround at the university\n\nYour command words are",
+    "help" : "You are lost. You are alone. You wander\naround at the university\n\nYour command words are:\n",
     "room" : "You are ",
     "exits" : "\nExits: ",
     "items" : "\nItems: ",
@@ -16,5 +16,6 @@
     "take_item" :  " is not in the room",
     "take_heavy" : " is too heavy",
     "invalid_command" : "Not a valid command. type 'help' for the valid commands",
-    "goodbye" : "Thank you for playing. Good bye\n"
+    "goodbye" : "Thank you for playing. Good bye\n",
+    "player" : "Player"
 }

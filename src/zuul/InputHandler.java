@@ -58,7 +58,11 @@ public class InputHandler {
             exit(1);
         }
       
-        while (tokenizer.hasNext()) {        //each word (which has to be seperated with a space) is stored in the array list 'words'
+        /**
+         * each word (which has to be separated with a space) 
+         * is stored in the array list 'words'
+         */
+        while (tokenizer.hasNext()) {
             words.add(tokenizer.next());
         }
     }

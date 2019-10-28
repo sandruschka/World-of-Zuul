@@ -105,9 +105,6 @@ public class Room {
         for (Item i : items)
             result += i.getName() + "(" + i.getWeight() + ") ";
         return result;
-//        return items.stream()
-//                .map(item -> item.getName())
-//                .collect(Collectors.joining(" "));
     }
     
     /**
