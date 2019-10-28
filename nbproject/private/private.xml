@@ -3,25 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/Actions/Help.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/GameController.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/Directions/Direction.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/Room.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/View/View.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/Npc/NpcHandler.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/Item.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/Player.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/Npc/Npc.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/Actions/Take.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/Action.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/ValidActions.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/InputHandler.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/Actions/Quit.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/Actions/Give.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/WorldOfZuul.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/Actions/Look.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/Actions/Go.java</file>
-            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/LivingEntity.java</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/Actions/Quit.java</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/Languages/English.xml</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/Actions/Take.java</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/zuul/LivingEntity.java</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/Actions/Help.java</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/zuul/ValidActions.java</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/Npc/NpcHandler.java</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/Languages/English.json</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/Languages/LanguageHandler.java</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/zuul/GameController.java</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/zuul/FileHandler.java</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/zuul/JsonReader.java</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/world/of/zuul/world/of/zuul/GameController.html</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/Actions/Give.java</file>
+            <file>file:/home/sandra/NetBeansProjects/World-of-Zuul/src/zuul/Room.java</file>
         </group>
     </open-files>
 </project-private>

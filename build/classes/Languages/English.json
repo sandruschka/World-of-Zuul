@@ -1,3 +1,20 @@
 {
-    "welcome": "sandra"
+    "welcome": "Welcome to the World of Zuul!\nWorld of Zuul is a new, incredibly boring adventure game.\nType 'help' if you need help.\n\n",
+    "give_what": "Give what?",
+    "give_who" : "Give it to whom?",
+    "give_absent" : " is not in the room",
+    "give_noItem" : "You don't have the ",
+    "go_where" : "Go where?",
+    "go_direction" : ": There is no such direction",
+    "go_exit" : "There is no door to the ",
+    "help" : "You are list. You are alone. You wander\naround at the university\n\nYour command words are",
+    "room" : "You are ",
+    "exits" : "\nExits: ",
+    "items" : "\nItems: ",
+    "npc" : "\nNpc: ",
+    "take_what" : "Take what?",
+    "take_item" :  " is not in the room",
+    "take_heavy" : " is too heavy",
+    "invalid_command" : "Not a valid command. type 'help' for the valid commands",
+    "goodbye" : "Thank you for playing. Good bye\n"
 }
