@@ -99,6 +99,10 @@ public class Room {
             items.add(new Item(name, weight));
     }
     
+    public void addItem(Item item) {
+            items.add(item);
+    }
+    
     private String getItemsString() {
         String result = "";
         for (Item i : items)
