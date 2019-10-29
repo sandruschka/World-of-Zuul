@@ -6,7 +6,8 @@
 package zuul;
 
 /**
- *
+ * World of Zuul is a very simple, text based adventure game.
+ * Players can walk around some scenery.
  * @author sandra
  */
 public class WorldOfZuul {

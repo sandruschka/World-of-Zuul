@@ -10,7 +10,6 @@ import View.View;
 import static java.lang.System.exit;
 import Directions.Direction;
 import Languages.LanguageHandler;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

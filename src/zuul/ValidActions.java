@@ -30,9 +30,9 @@ public class ValidActions {
          * iterate through all the classes found in the package
          */
         try {
-            for (String s : fileHandler.getClassesFromPackage(Action.PACKAGE_NAME)) {
-                actions += " " + s;
-            }
+            actions = fileHandler.getClassesFromPackage(Action.PACKAGE_NAME).stream()
+                    .map((s) -> s + " ")
+                    .reduce(actions, String::concat);
         } catch (NullPointerException e) {
              Logger.getLogger(ValidActions.class.getName())
                     .log(Level.WARNING, e.getMessage());

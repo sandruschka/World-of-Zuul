@@ -53,11 +53,10 @@ public class Room {
      * @return  a string describing the room
      */
     public String getRoomDescription() {
-        String description = GameController.languageHandler.getText("room") + this.description
+        return  GameController.languageHandler.getText("room") + this.description
                 + GameController.languageHandler.getText("exits") + getExitsString()
                 + GameController.languageHandler.getText("items") + getItemsString()
                 + GameController.languageHandler.getText("npc") + GameController.getInstance().getNpcHandler().getStringNpcsInRoom(this);
-        return description;
     }
     
     /**

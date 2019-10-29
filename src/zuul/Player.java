@@ -5,9 +5,6 @@
  */
 package zuul;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author sandra
  * @see zuul.LivingEntity

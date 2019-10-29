@@ -23,6 +23,7 @@ public class Help implements Action {
      */
     @Override
     public String execute(List<String> args) {
-        return GameController.languageHandler.getText("help") + new ValidActions().getActionsString();
+        return GameController.languageHandler.getText("help")
+                + new ValidActions().getActionsString();
     }
 }

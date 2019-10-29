@@ -37,7 +37,12 @@ public class JsonReader {
     public final void setFile(String file) {
         JSONParser jsonParser = new JSONParser();
         try {
+            
+            /**
+             * The jSON file to parse is being set
+             */
             jSONObject = (JSONObject)jsonParser.parse(new FileReader(file));
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(JsonReader.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException | ParseException ex) {

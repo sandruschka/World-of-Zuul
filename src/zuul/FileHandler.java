@@ -23,10 +23,10 @@ public class FileHandler {
      * @param packageName
      * @return a list containing each name as a String
      */
-    
-    
     public List<String> getClassesFromPackage(String packageName) {
+        
         List<String> classes = new ArrayList<>();
+        
         try {
             File directory = getPackageDirectory(packageName);
             
@@ -36,7 +36,6 @@ public class FileHandler {
         } catch(NullPointerException e) {
             Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, e);
         }
-        
         return classes;
     }
     
